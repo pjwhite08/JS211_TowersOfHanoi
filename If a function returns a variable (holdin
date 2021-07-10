@@ -1,0 +1,2 @@
+If a function returns a variable (holding something I created in that function), can I use that variable as the parameter for another function?
+Can a function return two variables (and then those be used as the parameters in another function)

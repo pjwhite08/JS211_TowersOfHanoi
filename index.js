@@ -7,7 +7,7 @@
 // * Why are you get a warning in your console? Fix it.
 // * Delete these comment lines!
 
-const stone = null
+let stone = null
 
 // this function is called when a row is clicked. 
 // Open your inspector tool to see what is being captured and can be used.
@@ -16,17 +16,19 @@ const selectRow = (row) => {
   
   console.log("Yay, we clicked an item", row)
   console.log("Here is the stone's id: ", row.id)
-  console.log("Here is the stone's data-size: ", currentRow)
+  console.log("Here is the stone's data-row: ", currentRow)
 
   pickUpStone(row.id)
 } 
 
 // this function can be called to get the last stone in the stack
 // but there might be something wrong with it...
+//... is the "wrong" thing the fact that you could pick up a stone that doesn't exist? 
+//... or was it that the stone was saved as a const variable, and it needed to be let, because it will change?
 const pickUpStone = (rowID) => {
   const selectedRow = document.getElementById(rowID);
   stone = selectedRow.removeChild(selectedRow.lastChild);
-  console.log(stone)
+  console.log(`PUS This is the stone that has been picked up: ${stone}`)
 }
 
 // You could use this function to drop the stone but you'll need to toggle between pickUpStone & dropStone
