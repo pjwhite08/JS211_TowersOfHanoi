@@ -26,6 +26,8 @@ let stacks = {
   b: [],
   c: []
 };
+
+
 // //(practice)
 // // console.log("this is tower a: ", stacks.a)
 // // console.log("this is tower a, fourth position: ", stacks.a[3])
@@ -84,6 +86,10 @@ const printStacks = () => {
 
 
 const isLegal = (startStack, endStack) => {
+  startStack = stacks[startStack]
+  console.log("IL this is the startStack: ", startStack)
+  endStack = stacks[endStack]
+  console.log("IL this is the endStack: ", endStack)
   console.log(`IL isLegal is running!`)
   console.log("IL Can I access startStack?", startStack)
 
@@ -106,13 +112,13 @@ const isLegal = (startStack, endStack) => {
       console.log("IL Yup that's a legal move")
       return true
     }
-    else {
+    else if (lastStart > lastEnd) {
       console.log("the condition in IL returned false")
       console.log(`IL You can't put ${lastStart} on ${lastEnd}`)
       return false
     }
-  
   }
+
   const movePiece = (startStack, endStack) => {
     console.log("move piece is working")
     let currentPiece = startStack.pop()
@@ -181,17 +187,19 @@ const towersOfHanoi = (startStack, endStack) => {
     console.log(`Please choose only a, b, or c`)
     return false
   }
-  startStack = stacks[startStack]
-  console.log("HHH this is the startStack: ", startStack)
-  endStack = stacks[endStack]
-  console.log("HHH this is the endStack: ", endStack)
+ 
   
-  isLegal(startStack, endStack)
+  // isLegal(startStack, endStack)
 
   let legalMove = isLegal(startStack, endStack)
   console.log(`HHH this is the value returned from isLegal: ${legalMove}`)
     if (legalMove == false) {
     return false}
+    
+    startStack = stacks[startStack]
+    console.log("IL this is the startStack: ", startStack)
+    endStack = stacks[endStack]
+    console.log("IL this is the endStack: ", endStack)
 
   movePiece(startStack, endStack)
 
@@ -261,6 +269,7 @@ if (typeof describe === 'function') {
       assert.equal(isLegal('a', 'c'), true);
     });
   });
+
   describe('#checkForWin()', () => {
     it('should detect a win', () => {
       stacks = { a: [], b: [4, 3, 2, 1], c: [] };
