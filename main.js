@@ -11,16 +11,12 @@ const rl = readline.createInterface({
 
 
 
-// An object that represents the three stacks of Towers of Hanoi; 
-  // * each key is an array of Numbers: 
-    // * A is the far-left, 
-    // * B is the middle, 
-    // * C is the far-right stack
-      // * Each number represents the largest to smallest tokens: 
-        // * 4 is the largest, 
-        // * 1 is the smallest
-console.log("I'm working!")
 
+//This is the board, as it was given to us. 
+//The variable stacks represents the board. 
+//The board is defined as an object with three key: value pairs. 
+//Each value is an array. 
+//The numbers in the array represent the size of the stones (or pieces that will be moved according to the rules of the game.
 let stacks = {
   a: [4, 3, 2, 1],
   b: [],
@@ -28,84 +24,51 @@ let stacks = {
 };
 
 
-// //(practice)
-// // console.log("this is tower a: ", stacks.a)
-// // console.log("this is tower a, fourth position: ", stacks.a[3])
-// // console.log(`this is the length of tower a: ${stacks.a.length}`)
-// // const indexOfLast = stacks.a.length - 1
-// // console.log(`This is the index of the last element in tower a: ${indexOfLast}`)
-// // console.log(`this is value in the top/last posistion of tower a: ${stacks.a[indexOfLast]}`)
-// // console.log("this is the last element in tower a: ", stacks.a.pop())
-// //console.log(`push 2 to the end of stack b ${stacks.b.push(2)} and here is the new b stack: ${stacks.b}`)
-
-//This doesn't work:
-// let myFunction = () => {
-//   return true
-// }
-// if (myFunction() = true ) {
-//   console.log ("it worked")
-// }
-
-// //This creates variables a, b, and c so a user can input any of these and the correct tower will be grabbed/ stored
-// // const a = stacks.a
-// // console.log("this is tower a: ", a)
-// // const b = stacks.b
-// // console.log("this is tower b: ", b)
-// // const c = stacks.c
-// // console.log("this is tower c: ", c)
-
-// // let startStack = b
-// // console.log(`These are the values in the startStack you chose: ${startStack}`)
-// // let endStack = c
-// // console.log(`These are the values in the endStack you chose: ${endStack}`)
-
-// //This works:
-// const myFunction = (startStack, endStack) => {
-//   let sum = startStack + endStack
-//   return sum
-// }
-// console.log("Thisis my function: ", myFunction(3, 4))
-// // console.log("sum of myFunction:", myFunction(3, 4))
-// // let saved = myFunction(3,4)
-// // console.log("myFunction saved as a variable: ", saved)
-// // //This doesn't
-// // let savedAgain = myFunction(startStack, endStack) 
-// // startStack = 5
-// // endStack = 5
-// // console.log("myFunction w variables defined later: ", savedAgain)
-// //I may want to change these to a, b, and c... Yes, it looks like the test expects these parameters to be a, b, c. I need to know how to read the tests.
-
-// //Start here. What is this function doing? This function prints the arrays at keys a, b, and c to show the stacks in the console
+//This code was also given to us
+//The function printStacks() prints three lines in the console log.
+//Each line shows the letter of the tower. These letters correspond to the keys of the object stacks
+// The letter of the tower is followed by the value associated with that key, i.e., the array associated with that tower
+//If I were to redo this from scratch, I would likely rename the stacks variable as playArea and the keys as towerA, towerB, and towerC
+//playArea.towerA helps me imagine what this represents  better than stacks.a. The array it yields is a tower (or the values of a tower) in the play area
 const printStacks = () => {
   console.log("a: " + stacks.a);
   console.log("b: " + stacks.b);
   console.log("c: " + stacks.c);
 }
 
-// // This function places the grabbed piece (the one from the startStack) onto the end stack (this move should have already been confirmed legal by isLegal function)
 
 
+
+//The function isLegal() redefines startStack and endStack; this allows us to work with arrays that represent each stack
+//and defines variables (lengthOfStartStack and lengthOfEndStack) that represent the length of each stack so we can
+//and define variables (indexOfLastStartStack and indescOfLastEndStack) that represent last index of the last/ top stone of each stack
+//Once we can access the index of the the last element in each array, we can 
+//define variables that represent the size of the top stone of each stack, lastStart and lastEnd 
+//in order to compare those values to follow the rules of the game
+// The conditional statement conmpares the last stone (element) in each stack (array)
+// If the startStack has a length of zero, (i.e., the stack is empty) the function returns false. You can't grab a stone that isn't there.
+//If the endStack has a length of zero, (i.e., is empty) you can always place a stone there. Stones can always go on empty stacks.
+//Or if the stone from the top/end of the startStack (lastStart) is smaller than the stone on the top/end of the endStack (lastEnd)
+//so you can make those moves and the function returns true
+//Or if the stone from the top/end of the startStack is larger than the stone on the top/end of the endStack,
+//that move is illegal and the function returns false
 const isLegal = (startStack, endStack) => {
   startStack = stacks[startStack]
-  console.log("IL this is the startStack: ", startStack)
   endStack = stacks[endStack]
-  console.log("IL this is the endStack: ", endStack)
-  console.log(`IL isLegal is running!`)
-  console.log("IL Can I access startStack?", startStack)
+ 
 
   let lengthOfStartStack = startStack.length
   let indexOfLastStartStack = startStack.length - 1
-  console.log(`IL This is the index of the last element in startStack: `, indexOfLastStartStack)
+
   let lengthOfEndStack = endStack.length
-  console.log(`IL This is the length of the endStack ${lengthOfEndStack}`)
   let indexOfLastEndStack = endStack.length -1
-  console.log(`IL This is the index of the last element in endStack: ${indexOfLastEndStack}`)
+  
   let lastStart = startStack[indexOfLastStartStack]
-  console.log(`IL This is the value of last element in the startStack: ${lastStart}`)
   let lastEnd = endStack[indexOfLastEndStack]
-  console.log(`IL  This is the value last element in the endStack:  ${lastEnd}`)
+
+  
     if (lengthOfStartStack == "0") {
-      console.log("You can't take anything off an empty stack!")
+      console.log("IL You can't take anything off an empty stack!")
       return false
     }
     else if ((lengthOfEndStack == "0")|| (lastStart < lastEnd)) {
@@ -113,23 +76,19 @@ const isLegal = (startStack, endStack) => {
       return true
     }
     else if (lastStart > lastEnd) {
-      console.log("the condition in IL returned false")
       console.log(`IL You can't put ${lastStart} on ${lastEnd}`)
       return false
     }
   }
-
+//The function movePiece() takes two arrays as parameters (as defined in towersOfHanoi())
+//The fucntion grabs a piece off the startStack and saves that in the variable currentPiece
+//This also mutates the startStack array, by removing the last element
+//Then, the currentPiece is pushed onto the endStack, mutating that array by adding an element to the end
   const movePiece = (startStack, endStack) => {
-    console.log("move piece is working")
+    
     let currentPiece = startStack.pop()
-    console.log(`MP This is the piece that you're going to move: ${currentPiece}`)
+    
     endStack.push(currentPiece)
-    // console.log(`movePiece. That move was legal, so movePiece is running`)
-    // console.log(`movePiece. Your piece has a value of ${currentPiece}`)
-    // console.log(`movePiece. now that start stack has ${startStack}`)
-    // let endStackLength = endStack.push(currentPiece)
-    // console.log(`movePiece. The end stack now has: ${endStack}`)
-    // printStacks()
   }
 
   // const currentPiece = stacks[startStack].pop()
@@ -161,15 +120,15 @@ const isLegal = (startStack, endStack) => {
 //   }  
 //   // isLegal(r, b)
   
-// What is a win in Towers of Hanoi? When should this function run? 
-// This function should run after each move is made; i.e., after movePiece has run
+//checkForWin() checks for the two possible winning conditions
+// if the value at each index of stack b is equal to 4, 3, 2, and 1 (respetively) or
+// if the same is true for stack c
+// the function returns true with and prints a winning message
+//otherwise, the function returns false and the game keeps playing
+//I realize this could be done with a much shorter line of code, but conceptually, this made the most sense to me, so I did it. 
 const checkForWin = () => {
-  console.log(`CWIN check win is running`)
-  // if either stack b or stack c has the array [4, 3, 2, 1], then a winner message should display
-console.log(stacks.a)
-console.log(stacks.b)
 if ((stacks.b[0] == 4 && stacks.b[1] == 3 && stacks.b[2] == 2 && stacks.b[3] == 1) || (stacks.c[0] == 4 && stacks.c[1] == 3 && stacks.c[2] == 2 && stacks.c[3] == 1)) {
-  console.log(`You win!`)
+  console.log(`CWIN You win!`)
   return true
 }
 else {
@@ -177,36 +136,55 @@ else {
   return false
 }
 }
-// // When is this function called? What should it do with its argument?
+
+//The towersOfHanoi() function takes two strings as parameters
+//The first conditional statement checks to see if
+//you entered the same string twice
+//in which case it returns "You can't start and end on the same stack"
+//and returns false, which makes no changes and prompts you to enter new stacks
+//I realize that, at this point, you could have entered two of the same anything - not necessarily letters that represented a stack - and this would give a return message as if you had entered a stack letter
+//this conditional statement then checks to make sure that you have entered only a, b, or c in each stack
+// and if you did, it prints the letter of the startStack tower  and endStack you chose and allows the rest of the function to run
+//Otherwise, if anything else was input, the function prints "Please choose only a, b, or c" 
+//and returns false, prompting you to enter start and end stack letters again
+
+//After we know appropriate parameters have been entered, the results of isLegal() are saved as a variable, legalMove
+//so we can use this information to decide to continue or stop and return to choosing start and end stacks
+//If legalMove is false, you are prompted to re-enter a start stack and end stack
+//If legalMove is true, the game continues to movePiece()
+
+//But before we call movePiece(), I saved the variables startStack and endStack as the values of those stacks (much like I had in isLegal)
+// so movePiece() takes those arrays as parameters, instead of strings a, b, or c
+
+//movePiece is called
+//checkWin is called
+//These two allow you to continue indefinitely, much like the real game.
+// If you want to sit there and continue to move stones around, have at it. As the only child in the house without cable, I did that a lot. 
 const towersOfHanoi = (startStack, endStack) => {
-  console.log("HHH towersOfHanoi function initiated")
-  if ((startStack == "a" || startStack == "b" || startStack == "c") && (endStack == "a" || endStack == "b" || endStack == "c")) {
+  if (startStack == endStack) {
+    console.log ("You can't start and end on the same stack")
+    return false
+  }
+  
+  else if ((startStack == "a" || startStack == "b" || startStack == "c") && (endStack == "a" || endStack == "b" || endStack == "c")) {
     console.log(`HHHH You chose startStack ${startStack} and endStack ${endStack}`)
   }
+
   else {
     console.log(`Please choose only a, b, or c`)
     return false
   }
- 
-  
-  // isLegal(startStack, endStack)
 
   let legalMove = isLegal(startStack, endStack)
-  console.log(`HHH this is the value returned from isLegal: ${legalMove}`)
     if (legalMove == false) {
     return false}
     
-    startStack = stacks[startStack]
-    console.log("IL this is the startStack: ", startStack)
-    endStack = stacks[endStack]
-    console.log("IL this is the endStack: ", endStack)
+  startStack = stacks[startStack]
+  endStack = stacks[endStack]
 
   movePiece(startStack, endStack)
 
-  checkForWin()
- 
-  console.log("towersOfHanoi function: did it end?")
-  
+  checkForWin() 
 }
 
 
@@ -234,21 +212,6 @@ if (typeof describe === 'function') {
       assert.deepEqual(stacks, { a: [4, 3, 2], b: [1], c: [] });
     });
   });
-
-
-  // describe('#theNewTest()', () => {
-  //   it('if a move is legal', () => {
-  //     stacks = {
-  //       a: [8, 7],
-  //       b: [5],
-  //       c: [6]
-  //     };
-  //     let actual = isLegal("a", "b")
-  //     let expected = false
-  //    assert.equal(actual, expected, "that's not a legal move")
-  //   });
-  // });
-
 
 
   describe('#isLegal()', () => {
