@@ -8,10 +8,6 @@ const rl = readline.createInterface({
 });
 // //---------------------------------------------------------------
 
-
-
-
-
 //This is the board, as it was given to us. 
 //The variable stacks represents the board. 
 //The board is defined as an object with three key: value pairs. 
@@ -22,7 +18,6 @@ let stacks = {
   b: [],
   c: []
 };
-
 
 //This code was also given to us
 //The function printStacks() prints three lines in the console log.
@@ -35,9 +30,6 @@ const printStacks = () => {
   console.log("b: " + stacks.b);
   console.log("c: " + stacks.c);
 }
-
-
-
 
 //The function isLegal() redefines startStack and endStack; this allows us to work with arrays that represent each stack
 //and defines variables (lengthOfStartStack and lengthOfEndStack) that represent the length of each stack so we can
@@ -56,7 +48,6 @@ const isLegal = (startStack, endStack) => {
   startStack = stacks[startStack]
   endStack = stacks[endStack]
  
-
   let lengthOfStartStack = startStack.length
   let indexOfLastStartStack = startStack.length - 1
 
@@ -66,7 +57,6 @@ const isLegal = (startStack, endStack) => {
   let lastStart = startStack[indexOfLastStartStack]
   let lastEnd = endStack[indexOfLastEndStack]
 
-  
     if (lengthOfStartStack == "0") {
       console.log("IL You can't take anything off an empty stack!")
       return false
@@ -80,46 +70,18 @@ const isLegal = (startStack, endStack) => {
       return false
     }
   }
+  
 //The function movePiece() takes two arrays as parameters (as defined in towersOfHanoi())
 //The fucntion grabs a piece off the startStack and saves that in the variable currentPiece
 //This also mutates the startStack array, by removing the last element
 //Then, the currentPiece is pushed onto the endStack, mutating that array by adding an element to the end
-  const movePiece = (startStack, endStack) => {
+const movePiece = (startStack, endStack) => {
     
     let currentPiece = startStack.pop()
     
     endStack.push(currentPiece)
   }
 
-  // const currentPiece = stacks[startStack].pop()
-  // console.log(`This is the value of the current piece after you chose your startStack: ${currentPiece}`)
-  
-
-//   // let topStart = stacks[startStack].pop
-// // console.log("Is this the last number in the startStack? ", topStart)
-//   // let currentPiece = startStack.pop()
-//   // // console.log(`isLegal. This is the current piece that isLegal is working with: ${currentPiece}`)
-//   // if (currentPiece !== 6) {
-//   //   //push is back on here
-//   //   console.log("That's not a legal move")
-//   // }
-//   // else {
-//   //   console.log("That's 6")
-//   // }
-//   // console.log(`isLegal. This is the length of your endStack:  ${endStack.length}`)
-//   // let indexOfLast = endStack.length - 1
-//   // console.log(`isLegal. This is the index of the last element in endStack: ${indexOfLast}`) 
-//   // console.log(`isLegal. this is the top/last value in the endStack: ${endStack[indexOfLast]}`)
-//   // if (currentPiece < endStack[indexOfLast] ) {
-//   //   console.log("isLegal contingency met. That's a cool move")
-//   //   movePiece(startStack, endStack)
-//   //   }
-//   //   else {
-//   //     console.log(`isLegal. You can't put that there!`)
-//   //   }
-//   }  
-//   // isLegal(r, b)
-  
 //checkForWin() checks for the two possible winning conditions
 // if the value at each index of stack b is equal to 4, 3, 2, and 1 (respetively) or
 // if the same is true for stack c
